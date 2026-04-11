@@ -89,7 +89,7 @@ When writing documentation or examples:
 **IMPORTANT**: Before any git commands for this repo, ensure you are in the correct directory:
 
 ```bash
-cd ~/projects/my-projects/ragenie
+cd ~/workspaces/rajiv/ragenie
 ```
 
 Each repo in the ecosystem has its own git history. Don't run git commands from the wrong directory.
