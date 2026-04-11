@@ -4,20 +4,6 @@
 
 This is a **PUBLIC** open source repository. Be careful not to include confidential information.
 
-## Repository Ecosystem
-
-| Repository | Type | Purpose | Location |
-|------------|------|---------|----------|
-| **ragbot** | Public | AI assistant CLI + Web UI + API | `~/workspaces/rajiv/ragbot/` |
-| **ragenie** | Public | Agentic extension layer for Ragbot | `~/workspaces/rajiv/ragenie/` |
-| **ai-knowledge-*** | Private | AI Knowledge content repos | `~/workspaces/{workspace}/ai-knowledge-{name}` |
-
-Note: Home directory varies by machine (`/Users/rajiv` vs `/Users/rajivpant`), so use `~` for paths.
-
-## VS Code Workspace
-
-All repositories are in the same VS Code workspace for unified development.
-
 ## Product Relationship
 
 - **Ragbot**: Core RAG-enabled assistant (CLI + Web UI + API). Actively maintained.
@@ -84,16 +70,6 @@ When writing documentation or examples:
 - Separate collections per workspace with query-time merging
 - Supports workspace inheritance in retrieval
 
-## Git Operations
-
-**IMPORTANT**: Before any git commands for this repo, ensure you are in the correct directory:
-
-```bash
-cd ~/workspaces/rajiv/ragenie
-```
-
-Each repo in the ecosystem has its own git history. Don't run git commands from the wrong directory.
-
 ## Versioning
 
 - Version is tracked in `VERSION` file (semantic versioning: MAJOR.MINOR.PATCH)
@@ -110,7 +86,3 @@ Each repo in the ecosystem has its own git history. Don't run git commands from 
 - FastAPI for backend services
 - React/TypeScript for frontend
 - Qdrant for vector search (shared technology choice with Ragbot's planned RAG)
-
-## Skills
-
-For code review methodology, see the synthesis-codebase-review and synthesis-pr-review skills.

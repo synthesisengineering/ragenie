@@ -76,3 +76,6 @@ infrastructure/monitoring/data/
 
 # OS
 Thumbs.db
+
+# Personal Claude Code context (managed via mac-sync)
+CLAUDE.local.md
