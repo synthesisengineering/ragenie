@@ -8,9 +8,9 @@ This is a **PUBLIC** open source repository. Be careful not to include confident
 
 | Repository | Type | Purpose | Location |
 |------------|------|---------|----------|
-| **ragbot** | Public | AI assistant CLI + Web UI + API | `~/projects/my-projects/ragbot/` |
-| **ragenie** | Public | Agentic extension layer for Ragbot | `~/projects/my-projects/ragenie/` |
-| **ai-knowledge-*** | Private | AI Knowledge content repos | `~/projects/my-projects/ai-knowledge/` |
+| **ragbot** | Public | AI assistant CLI + Web UI + API | `~/workspaces/rajiv/ragbot/` |
+| **ragenie** | Public | Agentic extension layer for Ragbot | `~/workspaces/rajiv/ragenie/` |
+| **ai-knowledge-*** | Private | AI Knowledge content repos | `~/workspaces/{workspace}/ai-knowledge-{name}` |
 
 Note: Home directory varies by machine (`/Users/rajiv` vs `/Users/rajivpant`), so use `~` for paths.
 
