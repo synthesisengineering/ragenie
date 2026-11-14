@@ -55,7 +55,7 @@ class Document(Base, TimestampMixin):
 
     # Additional metadata stored as JSON
     # Example: {"tags": ["work", "project-a"], "source": "upload", "version": 1}
-    metadata: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
+    meta: Mapped[Optional[dict]] = mapped_column("metadata", JSON, nullable=True)
 
     # Cached content for quick retrieval (optional)
     cached_content: Mapped[Optional[str]] = mapped_column(Text, nullable=True)

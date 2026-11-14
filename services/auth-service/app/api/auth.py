@@ -48,11 +48,11 @@ async def get_current_user(
     if payload is None:
         raise credentials_exception
 
-    user_id: int = payload.get("sub")
+    user_id = payload.get("sub")
     if user_id is None:
         raise credentials_exception
 
-    user = db.query(User).filter(User.id == user_id).first()
+    user = db.query(User).filter(User.id == int(user_id)).first()
     if user is None:
         raise credentials_exception
 
@@ -128,8 +128,8 @@ async def login(user_data: UserLogin, db: Session = Depends(get_db)):
     db.commit()
 
     # Create tokens
-    access_token = create_access_token(data={"sub": user.id, "username": user.username})
-    refresh_token = create_refresh_token(data={"sub": user.id})
+    access_token = create_access_token(data={"sub": str(user.id), "username": user.username})
+    refresh_token = create_refresh_token(data={"sub": str(user.id)})
 
     return Token(access_token=access_token, refresh_token=refresh_token)
 
@@ -156,7 +156,7 @@ async def refresh_token(token_data: RefreshTokenRequest, db: Session = Depends(g
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    user_id: int = payload.get("sub")
+    user_id = payload.get("sub")
     if user_id is None:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -164,7 +164,7 @@ async def refresh_token(token_data: RefreshTokenRequest, db: Session = Depends(g
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    user = db.query(User).filter(User.id == user_id).first()
+    user = db.query(User).filter(User.id == int(user_id)).first()
     if not user or not user.is_active:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -172,8 +172,8 @@ async def refresh_token(token_data: RefreshTokenRequest, db: Session = Depends(g
         )
 
     # Create new tokens
-    access_token = create_access_token(data={"sub": user.id, "username": user.username})
-    new_refresh_token = create_refresh_token(data={"sub": user.id})
+    access_token = create_access_token(data={"sub": str(user.id), "username": user.username})
+    new_refresh_token = create_refresh_token(data={"sub": str(user.id)})
 
     return Token(access_token=access_token, refresh_token=new_refresh_token)
 

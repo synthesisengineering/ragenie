@@ -93,7 +93,8 @@ class Message(Base, TimestampMixin):
 
     # Additional metadata
     # Example: {"temperature": 0.7, "max_tokens": 4096, "finish_reason": "stop"}
-    metadata: Mapped[Optional[dict]] = mapped_column(
+    meta: Mapped[Optional[dict]] = mapped_column(
+        "metadata",
         JSON,
         nullable=True
     )
