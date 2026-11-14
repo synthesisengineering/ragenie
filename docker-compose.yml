@@ -69,7 +69,7 @@ services:
     environment:
       QDRANT__SERVICE__GRPC_PORT: 6334
     healthcheck:
-      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:6333/health || exit 1"]
+      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/6333' || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -99,6 +99,7 @@ services:
         condition: service_healthy
     volumes:
       - ./services/auth-service:/app
+      - ./shared:/app/shared:ro
     networks:
       - ragenie-network
     restart: unless-stopped
@@ -124,6 +125,8 @@ services:
         condition: service_started
     volumes:
       - ./services/user-service:/app
+      - ./shared:/app/shared:ro
+      - ./shared/models:/app/models:ro
     networks:
       - ragenie-network
     restart: unless-stopped
@@ -135,7 +138,7 @@ services:
       dockerfile: Dockerfile
     container_name: ragenie-document-service
     environment:
-      DATABASE_URL: postgresql://ragenie:${POSTGRES_PASSWORD:-ragenie_dev_password}@postgres:5432/ragenie
+      DATABASE_URL: postgresql+asyncpg://ragenie:${POSTGRES_PASSWORD:-ragenie_dev_password}@postgres:5432/ragenie
       REDIS_URL: redis://redis:6379/2
       QDRANT_HOST: qdrant
       QDRANT_PORT: 6333
@@ -180,7 +183,7 @@ services:
       dockerfile: Dockerfile
     container_name: ragenie-conversation-service
     environment:
-      DATABASE_URL: postgresql://ragenie:${POSTGRES_PASSWORD:-ragenie_dev_password}@postgres:5432/ragenie
+      DATABASE_URL: postgresql+asyncpg://ragenie:${POSTGRES_PASSWORD:-ragenie_dev_password}@postgres:5432/ragenie
       REDIS_URL: redis://redis:6379/3
       QDRANT_HOST: qdrant
       QDRANT_PORT: 6333
@@ -207,6 +210,7 @@ services:
       # Product RESOURCES (part of repo)
       - ./resources:/data/resources:ro
       - ./services/conversation-service:/app
+      - ./shared:/app/shared:ro
     networks:
       - ragenie-network
     restart: unless-stopped
@@ -235,6 +239,7 @@ services:
         condition: service_started
     volumes:
       - ./services/llm-gateway-service:/app
+      - ./shared:/app/shared:ro
     networks:
       - ragenie-network
     restart: unless-stopped

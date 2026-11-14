@@ -8,3 +8,6 @@ redis==5.0.1
 qdrant-client==1.11.3
 python-multipart==0.0.9
 aiofiles==24.1.0
+langchain-openai>=0.2.5
+langchain-qdrant>=0.2.0
+httpx<0.28

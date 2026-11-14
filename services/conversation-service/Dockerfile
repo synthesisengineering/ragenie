@@ -14,8 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY app/ ./app/
 
-# Copy shared models
-COPY --from=shared /app/shared /app/shared
+# Shared models are bind-mounted at /app/shared by docker-compose.yml
 
 # Expose port
 EXPOSE 8000
