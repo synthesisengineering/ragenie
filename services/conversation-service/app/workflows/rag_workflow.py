@@ -195,7 +195,7 @@ class RAGWorkflow:
             # Call LLM Gateway Service with configured model settings
             async with httpx.AsyncClient(timeout=60.0) as client:
                 response = await client.post(
-                    f"{settings.LLM_GATEWAY_URL}/chat/completions",
+                    f"{settings.LLM_GATEWAY_URL}/llm/chat",
                     json={
                         "messages": messages,
                         "model": state["model"],
@@ -207,7 +207,7 @@ class RAGWorkflow:
                 data = response.json()
 
             # Extract response
-            assistant_message = data["choices"][0]["message"]["content"]
+            assistant_message = data["content"]
             usage = data.get("usage", {})
 
             generation_time = (time.time() - start_time) * 1000
